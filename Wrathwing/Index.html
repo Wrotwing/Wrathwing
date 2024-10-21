@@ -47,6 +47,7 @@
             background: linear-gradient(135deg, #ff6600 0%, #ffcc00 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
         .content h2 {
             color: #fff;
@@ -194,12 +195,63 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .info-button {
+            background-color: #ff6600;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            margin-left: 10px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .info-button:hover {
+            background-color: #ffcc00;
+        }
+        .info-popup {
+            position: fixed;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            transition: bottom 0.5s ease-in-out;
+            z-index: 1001;
+        }
+        .info-popup h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .info-popup p {
+            font-size: 18px;
+        }
+        .info-popup .close-button {
+            background-color: #ff6600;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .info-popup .close-button:hover {
+            background-color: #ffcc00;
+        }
   </style>
   <script>
    let currentImageIndex = 0;
         const images = [
             { src: 'picture1.png', url: 'https://www.roblox.com/groups/33682746/Wrathwing-Group#!/about' },
-            { src: 'picture2.png', url: 'https://example2.com' },
+            { src: 'picture2.png', url: 'https://wrathtubes.netlify.app/' },
             { src: 'picture3.png', url: 'https://t.me/WrathwingNasasal' },
         ];
 
@@ -231,6 +283,14 @@
             });
         }
 
+        function openInfoPopup() {
+            document.getElementById('info-popup').style.bottom = '50%';
+        }
+
+        function closeInfoPopup() {
+            document.getElementById('info-popup').style.bottom = '-100%';
+        }
+
         window.onload = function() {
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loading-screen');
@@ -257,13 +317,17 @@
    <div class="content">
     <div class="text">
      <h1>
-      НОВЫЙ КОНТЕНТ
+      WRATHWING
      </h1>
+     <button class="info-button" onclick="openInfoPopup()">?</button>
      <h2>
-      Новая локация: Объездная
+      Doing somthing...
      </h2>
      <p>
-      Объездной называют неразвитый район вдали от Нью-Эриду. Здесьшние пустынные пейзажи совсем не похожи на то, что можно увидеть в Нью-Эриду.
+      I'm trying to be an animator, a musician, and SOOO rarely a programmer. I spend most of my time on music, well, just because I like it.
+     </p>
+     <p>
+      But as soon as I can, I'll try to come up with something else.
      </p>
      <div class="image-buttons">
       <button onclick="changeImage(-1)">
@@ -284,7 +348,7 @@
     <img alt="Donation Alerts" class="corner-image left" onclick="window.open('https://www.donationalerts.com/r/wrathwingm', '_blank')" src="DonationAlerts.jfif"/>
     <img alt="VK" class="corner-image right" onclick="window.open('https://vk.com/wrathwing', '_blank')" src="Vk.png"/>
     <div class="footer-text">
-     Белый текст по середине
+     Donate me!
     </div>
    </div>
   </div>
@@ -293,6 +357,11 @@
    </button>
    <button onclick="scrollToBottom()">
    </button>
+  </div>
+  <div id="info-popup" class="info-popup">
+   <h2>Why "Wrathwing?"</h2>
+   <p>I dont know fr. I just wrote in the nickname Wrathwing when I registered in discord 2020, and that's how it remained.</p>
+   <button class="close-button" onclick="closeInfoPopup()">Close</button>
   </div>
  </body>
 </html>
