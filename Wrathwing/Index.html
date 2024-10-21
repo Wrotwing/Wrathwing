@@ -1,0 +1,298 @@
+<html>
+ <head>
+  <title>
+   New Content
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: url('BGBlack.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+            overflow: hidden; /* Disable scrolling */
+        }
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header img {
+            width: 50px;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            height: 100vh; /* Full viewport height */
+        }
+        .content .text {
+            max-width: 50%;
+        }
+        .content h1 {
+            color: #ff6600;
+            font-size: 48px;
+            background: linear-gradient(135deg, #ff6600 0%, #ffcc00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .content h2 {
+            color: #fff;
+            font-size: 24px;
+        }
+        .content p {
+            color: #b3b3b3;
+            font-size: 18px;
+        }
+        .image-container {
+            position: relative;
+            max-width: 50%;
+        }
+        .image-container img {
+            width: 100%;
+            height: auto;
+            border: 5px solid #333;
+            transition: opacity 1s ease-in-out;
+            cursor: pointer;
+        }
+        .carousel {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .carousel .arrows {
+            display: flex;
+            gap: 5px;
+        }
+        .carousel .arrows i {
+            font-size: 24px;
+            cursor: pointer;
+            color: #ff6600;
+        }
+        .footer {
+            background: linear-gradient(135deg, #ff6600 0%, #ffcc00 100%);
+            padding: 20px;
+            text-align: center;
+            color: #000;
+            height: 100vh; /* Full viewport height */
+            position: relative;
+        }
+        .footer .cta {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .footer .cta button {
+            background-color: #000;
+            color: #ffcc00;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .footer .cta button:hover {
+            background-color: #333;
+        }
+        .scroll-buttons {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .scroll-buttons button {
+            background: linear-gradient(135deg, #ff6600 0%, #ffcc00 100%);
+            border: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .scroll-buttons button:hover {
+            background: linear-gradient(135deg, #ffcc00 0%, #ff6600 100%);
+        }
+        .image-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .image-buttons button {
+            background-color: #333;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            color: #fff;
+            font-size: 18px;
+        }
+        .image-buttons button:hover {
+            background-color: #ff6600;
+        }
+        .corner-image {
+            position: absolute;
+            width: 100px;
+            height: auto;
+            cursor: pointer;
+        }
+        .corner-image.left {
+            bottom: 20px;
+            left: 20px;
+        }
+        .corner-image.right {
+            bottom: 20px;
+            right: 20px;
+        }
+        .footer-text {
+            color: #fff;
+            font-size: 24px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease-in-out;
+        }
+        .loading-screen .spinner {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #ff6600;
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+  </style>
+  <script>
+   let currentImageIndex = 0;
+        const images = [
+            { src: 'picture1.png', url: 'https://www.roblox.com/groups/33682746/Wrathwing-Group#!/about' },
+            { src: 'picture2.png', url: 'https://example2.com' },
+            { src: 'picture3.png', url: 'https://t.me/WrathwingNasasal' },
+        ];
+
+        function changeImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+            const imageElement = document.getElementById('slideshow-image');
+            imageElement.style.opacity = 0;
+            setTimeout(() => {
+                imageElement.src = images[currentImageIndex].src;
+                imageElement.style.opacity = 1;
+            }, 500);
+        }
+
+        function openImageLink() {
+            window.open(images[currentImageIndex].url, '_blank');
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollToBottom() {
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        window.onload = function() {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.style.opacity = 0;
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    document.querySelector('.container').style.opacity = 1;
+                    document.querySelector('.container').style.transform = 'translateY(0)';
+                    document.querySelector('.scroll-buttons').style.opacity = 1;
+                }, 1000); // Adjust the timeout as needed
+            }, 2000); // Adjust the timeout as needed
+        }
+  </script>
+ </head>
+ <body>
+  <div id="loading-screen" class="loading-screen">
+   <div class="spinner">
+   </div>
+  </div>
+  <div class="container">
+   <div class="header">
+    <img alt="Logo" height="50" src="icon.png" width="50"/>
+   </div>
+   <div class="content">
+    <div class="text">
+     <h1>
+      НОВЫЙ КОНТЕНТ
+     </h1>
+     <h2>
+      Новая локация: Объездная
+     </h2>
+     <p>
+      Объездной называют неразвитый район вдали от Нью-Эриду. Здесьшние пустынные пейзажи совсем не похожи на то, что можно увидеть в Нью-Эриду.
+     </p>
+     <div class="image-buttons">
+      <button onclick="changeImage(-1)">
+       <i class="fas fa-chevron-left">
+       </i>
+      </button>
+      <button onclick="changeImage(1)">
+       <i class="fas fa-chevron-right">
+       </i>
+      </button>
+     </div>
+    </div>
+    <div class="image-container">
+     <img alt="Desert landscape with signs and vehicles" height="400" id="slideshow-image" onclick="openImageLink()" src="picture1.png" width="800"/>
+    </div>
+   </div>
+   <div class="footer">
+    <img alt="Donation Alerts" class="corner-image left" onclick="window.open('https://www.donationalerts.com/r/wrathwingm', '_blank')" src="DonationAlerts.jfif"/>
+    <img alt="VK" class="corner-image right" onclick="window.open('https://vk.com/wrathwing', '_blank')" src="Vk.png"/>
+    <div class="footer-text">
+     Белый текст по середине
+    </div>
+   </div>
+  </div>
+  <div class="scroll-buttons">
+   <button onclick="scrollToTop()">
+   </button>
+   <button onclick="scrollToBottom()">
+   </button>
+  </div>
+ </body>
+</html>

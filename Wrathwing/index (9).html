@@ -1,0 +1,61 @@
+<html>
+ <head>
+  <title>
+   Image Links
+  </title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+   body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a, #333);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+        .image-container {
+            display: flex;
+            gap: 100px;
+            align-items: center;
+        }
+        .image-container img {
+            width: 150px;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .image-container img:hover {
+            transform: scale(1.1);
+        }
+        .image-container .label {
+            text-align: center;
+            color: #ff6600;
+            margin-bottom: 10px;
+            font-size: 18px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+  </style>
+ </head>
+ <body>
+  <div class="image-container">
+   <div>
+    <div class="label">
+     Animations Channel
+    </div>
+    <a href="https://www.youtube.com/@WrathwingNasasal" target="_blank">
+     <img alt="Left Image" src="Youtubka.png"/>
+    </a>
+   </div>
+   <div>
+    <div class="label">
+     Music Channel
+    </div>
+    <a href="https://www.youtube.com/@wrathwing-oj7uw" target="_blank">
+     <img alt="Right Image" src="Youtubka.png"/>
+    </a>
+   </div>
+  </div>
+ </body>
+</html>
